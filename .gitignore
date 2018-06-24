@@ -1,6 +1,4 @@
-.DS_Store
-boot.o
-main.elf
-main.o
-syscalls.o
+*.elf
+*.o
 *.swp
+m5out
