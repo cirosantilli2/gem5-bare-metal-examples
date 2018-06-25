@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+../run /home/ciro/bak/git/linux-kernel-module-cheat/out/common/gem5/default /home/ciro/bak/git/linux-kernel-module-cheat/gem5/gem5

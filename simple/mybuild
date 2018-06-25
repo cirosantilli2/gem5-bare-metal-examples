@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eux
+
+#PATH="/mnt/sda3/git/crosstool-ng/.build/arm-unknown-eabi/buildtools/bin/:${PATH}" make CROSS_COMPILE=arm-unknown-eabi-
+
+export PATH="/mnt/sda3/git/crosstool-ng/.build/arm-unknown-eabi/buildtools/bin/:${PATH}"
+arm-unknown-eabi-gcc -mcpu=cortex-a8 -I /home/ciro/git/newlib-cygwin/newlib/libc/include -c -o main.o main.c
+arm-unknown-eabi-cpp boot.s -g -O3 -lunistd -I . -std=c99 | arm-none-eabi-as -EL -o boot.o
+arm-unknown-eabi-gcc -mcpu=cortex-a8 -nostartfiles -I /home/ciro/git/newlib-cygwin/newlib/libc/include -c -o syscalls.o ../syscalls.c
+arm-unknown-eabi-gcc -nostdlib -nostartfiles -Tboot.ld -o main.elf boot.o main.o syscalls.o /home/ciro/git/newlib-cygwin/./arm-none-eabi/newlib/libc.a /mnt/sda3/git/crosstool-ng/.build/arm-unknown-eabi/./buildtools/lib/gcc/arm-unknown-eabi/8.1.0/libgcc.a
+arm-unknown-eabi-objcopy -O binary main.elf main.bin
+qemu-system-arm -M realview-pb-a8 -serial stdio -kernel main.bin
