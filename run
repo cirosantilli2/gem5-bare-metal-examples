@@ -6,13 +6,16 @@ if [ $# -gt 1 ]; then
 else
   gem5_src_dir="$gem5_build_dir"
 fi
-"${gem5_build_dir}/build/ARM/gem5.opt" \
-  --debug-file=trace.txt \
-  --debug-flags='Exec' \
-  "${gem5_src_dir}/configs/example/fs.py" \
-  --bare-metal \
-  --disk-image="$(pwd)/../fake.iso" \
-  --kernel="$(pwd)/main.elf" \
-  --machine-type=RealView_PBX \
-  --mem-size=256MB \
-;
+cmd="\
+'${gem5_build_dir}/build/ARM/gem5.opt' \\
+--debug-file=trace.txt \\
+--debug-flags='Exec' \\
+'${gem5_src_dir}/configs/example/fs.py' \\
+--bare-metal \\
+--disk-image='$(pwd)/../fake.iso' \\
+--kernel='$(pwd)/main.elf' \\
+--machine-type=RealView_PBX \\
+--mem-size=256MB \\
+"
+echo "$cmd"
+eval "$cmd"

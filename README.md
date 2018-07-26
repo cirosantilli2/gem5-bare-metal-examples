@@ -6,6 +6,7 @@ Tested on Ubuntu 18.04, gem5 60600f09c25255b3c8f72da7fb49100e2682093a:
 
     apt-get install gcc-arm-none-eabi
     cd simple
+    make
     ../run ../path/to/gem5
 
 Or if you did an out of tree build:
