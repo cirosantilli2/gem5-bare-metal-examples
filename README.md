@@ -1,3 +1,5 @@
+THIS REPO HAS MOVED TO: https://github.com/cirosantilli/linux-kernel-module-cheat#baremetal-setup
+
 # gem5 ARM Bare Metal Examples
 
 Written in C with Newlib.
